@@ -1,5 +1,7 @@
+using API.Services;
 using DatingApp2025.API.Data;
 using Microsoft.EntityFrameworkCore;
+using API.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,7 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
     opt.UseSqlite(builder.Configuration.GetConnectionString("SqliteConnection"));
 });
 builder.Services.AddCors();
+builder.Services.AddSingleton<ITokenService, TokenService>();
 
 var app = builder.Build();
 
