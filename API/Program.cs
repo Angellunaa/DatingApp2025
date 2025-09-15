@@ -2,6 +2,9 @@ using API.Services;
 using DatingApp2025.API.Data;
 using Microsoft.EntityFrameworkCore;
 using API.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +17,19 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 });
 builder.Services.AddCors();
 builder.Services.AddSingleton<ITokenService, TokenService>();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        var tokenKey = builder.Configuration["TokenKey"]
+            ?? throw new ArgumentNullException("Cannot get the token key - Program.cs");
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenKey)),
+            ValidateIssuer = false,
+            ValidateAudience = false
+        };
+    });
 
 var app = builder.Build();
 

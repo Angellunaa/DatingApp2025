@@ -1,12 +1,15 @@
 using DatingApp2025.API.Data;
 using DatingApp2025.API.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 
+[Authorize]
 public class MembersController(AppDbContext context) : BaseApiController
 {
+    [Authorize]
     [HttpGet]
     public async Task<ActionResult<IReadOnlyList<AppUser>>> GetMembers()
     {
@@ -14,6 +17,8 @@ public class MembersController(AppDbContext context) : BaseApiController
 
         return members;
     }
+
+    [AllowAnonymous]
     [HttpGet("{id}")] // https://localhost:5001/api/members/bob-id
     public async Task<ActionResult<AppUser>> GetMember(string id)
     {
@@ -21,6 +26,6 @@ public class MembersController(AppDbContext context) : BaseApiController
 
         if (member == null) return NotFound();
 
-        return  member;
+        return member;
     }
 }
