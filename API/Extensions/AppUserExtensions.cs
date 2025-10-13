@@ -1,6 +1,6 @@
 using API.DTOs;
 using API.Interfaces;
-using DatingApp2025.API.Entities;
+using API.Entities;
 
 namespace API.Extensions;
 

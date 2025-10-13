@@ -1,5 +1,5 @@
-using DatingApp2025.API.Data;
-using DatingApp2025.API.Entities;
+using API.Data;
+using API.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

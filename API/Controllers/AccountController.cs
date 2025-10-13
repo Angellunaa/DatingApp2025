@@ -3,8 +3,8 @@ using System.Text;
 using API.DTOs;
 using API.Extensions;
 using API.Interfaces;
-using DatingApp2025.API.Data;
-using DatingApp2025.API.Entities;
+using API.Data;
+using API.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 

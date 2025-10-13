@@ -1,5 +1,5 @@
 using API.Services;
-using DatingApp2025.API.Data;
+using API.Data;
 using Microsoft.EntityFrameworkCore;
 using API.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;

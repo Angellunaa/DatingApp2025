@@ -1,5 +1,5 @@
 using System;
-using DatingApp2025.API.Entities;
+using API.Entities;
 
 namespace API.Interfaces;
 
