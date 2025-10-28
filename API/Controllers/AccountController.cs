@@ -1,7 +1,7 @@
 using System.Security.Cryptography;
 using System.Text;
 using API.DTOs;
-using API.Extensions;
+using API.Mappers;
 using API.Interfaces;
 using API.Data;
 using API.Entities;
