@@ -1,10 +1,8 @@
-using API.Data;
 using API.Entities;
 using API.Interfaces;
 using API.Mappers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 
@@ -29,6 +27,7 @@ public class MembersController(IMembersRepository memebersRepository) : BaseApiC
         return member.ToResponse();
     }
 
+    [AllowAnonymous]
     [HttpGet("{id}/photos")]
     public async Task<ActionResult<IReadOnlyList<Photo>>> GetPhotos(string id)
     {
