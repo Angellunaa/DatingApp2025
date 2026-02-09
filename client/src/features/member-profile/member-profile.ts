@@ -1,4 +1,4 @@
-import { Component, inject, signal, ViewChild } from '@angular/core';
+import { Component, HostListener, inject, signal, ViewChild } from '@angular/core';
 import { Member, EditableMember } from '../../types/member';
 import { ActivatedRoute } from '@angular/router';
 import { DatePipe } from '@angular/common';
@@ -15,6 +15,11 @@ import { ToastService } from '../../core/services/toast-service';
 
 export class MemberProfile {
   @ViewChild('memberProfileeditForm') memberProfileEditForm?: NgForm;
+  @HostListener('window:beforeunload', ['$event']) notify ($event: BeforeUnloadEvent) {
+    if (this.memberProfileEditForm?.dirty) {
+      $event.preventDefault();
+    }
+  }
   private route = inject(ActivatedRoute);
   private toast = inject(ToastService);
   protected member = signal<Member | undefined>(undefined);
