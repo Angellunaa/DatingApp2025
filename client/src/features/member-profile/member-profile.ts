@@ -53,12 +53,15 @@ export class MemberProfile {
   updateProfile() {
     if (!this.member()) return;
     const updatedMember = {...this.member(), ...this.editableMember};
-
-    console.group("UPDATE");
-    console.log(updatedMember);
-    console.groupEnd();
-
-    this.toast.success("Profile updated successfully");
-    this.membersService.editMode.set(false);
+    this.membersService.updateMember(this.editableMember).subscribe({
+      next: () => {
+        this.toast.success("Profile updated successfully");
+        this.membersService.editMode.set(false);
+        this.memberProfileEditForm?.reset(updatedMember);
+      },
+      error: (error) => {
+        this.toast.error("Failed to update profile: " + error);
+      }
+    });
   }
 }
