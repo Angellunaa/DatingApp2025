@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { EditableMember, Member, Photo } from '../../types/member';
@@ -8,8 +8,8 @@ import { Observable, tap } from 'rxjs';
   providedIn: 'root'
 })
 export class MembersService {
-  private http = inject(HttpClient);
-  private baseUrl = environment.apiUrl;
+  private readonly http = inject(HttpClient);
+  private readonly baseUrl = environment.apiUrl;
   editMode = signal(false);
   member = signal<Member | null>(null);
 
@@ -31,5 +31,11 @@ export class MembersService {
 
   updateMember(member: EditableMember) {
     return this.http.put(this.baseUrl + "members", member);
+  }
+
+  uploadPhoto(file: File) {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post<Photo>(this.baseUrl + "members/photo", formData);
   }
 }
