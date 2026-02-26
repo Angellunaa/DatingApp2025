@@ -10,7 +10,7 @@ export const memberResolver: ResolveFn<Member> = (route, state) => {
   const memberId = route.paramMap.get('id');
 
   if (memberId){
-    return memberService.getMember(memberId!);
+    return memberService.getMember(memberId);
   }
 
   router.navigateByUrl("/not-found");
