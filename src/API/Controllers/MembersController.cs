@@ -24,7 +24,10 @@ public class MembersController(IMembersRepository membersRepository,
     {
         var member = await membersRepository.GetMemberAsync(id);
 
-        if (member == null) return NotFound();
+        if (member == null) 
+        {
+            return NotFound();
+        }
 
         return member.ToResponse();
     }
