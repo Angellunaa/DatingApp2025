@@ -8,13 +8,13 @@ import { FilterModal } from '../filter-modal/filter-modal';
 
 @Component({
   selector: 'app-member-list',
-  imports: [MemberCard, Paginator],
+  imports: [MemberCard, Paginator, FilterModal],
   templateUrl: './member-list.html',
   styleUrl: './member-list.css',
 })
 export class MemberList {
   @ViewChild('filterModal') modal!: FilterModal;
-  private membersService  = inject(MembersService);
+  private membersService = inject(MembersService);
   protected paginatedMembers = signal<PaginationResult<Member> | null>(null);
   protected memberParams = new MemberParams();
 
@@ -24,10 +24,10 @@ export class MemberList {
 
   loadMembers() {
     this.membersService.getMembers(this.memberParams).subscribe({
-      next: result => {
+      next: (result) => {
         this.paginatedMembers.set(result);
-      }
-    })
+      },
+    });
   }
 
   onPageChange(event: { pageNumber: number; pageSize: number }) {
@@ -42,5 +42,14 @@ export class MemberList {
 
   onClose() {
     console.log('Modal closed');
+  }
+
+  onFilterChange(data: MemberParams) {
+    console.log('Modal submitted data: ', data);
+  }
+
+  resetFilters() {
+    this.memberParams = new MemberParams();
+    this.loadMembers();
   }
 }

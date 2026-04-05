@@ -207,12 +207,13 @@
             "name": "CurrentMemberId",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "nullable": true
             },
             "x-position": 2
           },
           {
-            "name": "PageNumber",
+            "name": "MinAge",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -221,13 +222,31 @@
             "x-position": 3
           },
           {
-            "name": "PageSize",
+            "name": "MaxAge",
             "in": "query",
             "schema": {
               "type": "integer",
               "format": "int32"
             },
             "x-position": 4
+          },
+          {
+            "name": "PageNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 5
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 6
           }
         ],
         "responses": {
