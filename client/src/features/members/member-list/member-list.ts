@@ -46,6 +46,8 @@ export class MemberList {
 
   onFilterChange(data: MemberParams) {
     console.log('Modal submitted data: ', data);
+    this.memberParams = data;
+    this.loadMembers();
   }
 
   resetFilters() {
