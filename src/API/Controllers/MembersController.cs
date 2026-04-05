@@ -6,7 +6,6 @@ using API.Interfaces;
 using API.Mappers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace API.Controllers;
 
@@ -15,9 +14,11 @@ public class MembersController(IMembersRepository membersRepository,
     IPhotoService photoService) : BaseApiController
 {
     [HttpGet]
-    public async Task<ActionResult<IReadOnlyList<Member>>> GetMembers([FromQuery] PaginationRequest paginationRequest)
+    public async Task<ActionResult<IReadOnlyList<Member>>> GetMembers([FromQuery] MemberRequest request)
     {
-        return Ok(await membersRepository.GetMembersAsync(paginationRequest));
+        request.CurrentMemberId = User.GetMemberId();
+        
+        return Ok(await membersRepository.GetMembersAsync(request));
     }
 
     [HttpGet("{id}")] // https://localhost:5001/api/members/bob-id
