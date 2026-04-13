@@ -12,8 +12,8 @@ post {
 
 body:json {
   {
-  	"email": "arenita@test.com",
-  	"password": "Pa$$w0rd"
+    "email": "arenita@test.com",
+    "password": "Pa$$w0rd"
   }
 }
 
@@ -28,6 +28,15 @@ script:post-response {
   if (test("Has properties")) {
       bru.setGlobalEnvVar('token', user.token);
   }
+}
+
+tests {
+  test("Should be able to login", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+  
+  const data = res.body;
+  bru.setVar('token', data.token);
 }
 
 settings {
