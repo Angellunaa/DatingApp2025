@@ -30,7 +30,7 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
             .WithMany(t => t.LikedByMembers)
             .HasForeignKey(s => s.TargetMemberId)
             .OnDelete(DeleteBehavior.NoAction);
-        
+
         modelBuilder.Entity<Message>()
             .HasOne(m => m.Recipient)
             .WithMany(mr => mr.MessagesReceived)
@@ -53,6 +53,11 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
             v => v.ToUniversalTime(),
             v => DateTime.SpecifyKind(v, DateTimeKind.Utc)
         );
+        
+        var nullableDateTimeConverter = new ValueConverter<DateTime?, DateTime?>(
+            v => v.HasValue ? v.Value.ToUniversalTime() : null,
+            v => v.HasValue ? DateTime.SpecifyKind(v.Value, DateTimeKind.Utc) : null
+        );
 
         foreach(var entityType in modelBuilder.Model.GetEntityTypes())
         {
@@ -62,8 +67,11 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
                 {
                     property.SetValueConverter(dateTimeConverter);
                 }
+                else if (property.ClrType == typeof(DateTime?))
+                {
+                    property.SetValueConverter(nullableDateTimeConverter);
+                }
             }
         }
     }
-
 }
