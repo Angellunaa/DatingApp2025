@@ -5,7 +5,7 @@ import { PaginationResult } from '../../types/PaginationMetadata';
 import { Message } from '../../types/message';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MessagesService {
   private baseUrl = environment.apiUrl;
@@ -18,6 +18,10 @@ export class MessagesService {
     params = params.append('pageSize', pageSize);
     params = params.append('container', container);
 
-    return this.http.get<PaginationResult<Message>>(this.baseUrl + 'messages', {params});
+    return this.http.get<PaginationResult<Message>>(this.baseUrl + 'messages', { params });
+  }
+
+  getMessageThread(memberId: string) {
+    return this.http.get<Message[]>(this.baseUrl + 'messages/thread/' + memberId);
   }
 }

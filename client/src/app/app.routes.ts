@@ -10,7 +10,7 @@ import { NotFound } from '../shared/errors/not-found/not-found';
 import { ServerError } from '../shared/errors/server-error/server-error';
 import { MemberProfile } from '../features/member-profile/member-profile';
 import { MemberPhotos } from '../features/member-photos/member-photos';
-import { MemberMessage } from '../features/member-messages/member-messages';
+import { MemberMessages } from '../features/member-messages/member-messages';
 import { memberResolver } from '../features/members/member-resolver';
 import { preventUnsavedChangesGuard } from '../core/guards/prevent-unsaved-changes-guard';
 
@@ -36,7 +36,7 @@ export const routes: Routes = [
             canDeactivate: [preventUnsavedChangesGuard],
           },
           { path: 'photos', component: MemberPhotos, title: 'Photos' },
-          { path: 'messages', component: MemberMessage, title: 'Messages' },
+          { path: 'messages', component: MemberMessages, title: 'Messages' },
         ],
       },
       { path: 'lists', component: Lists },
