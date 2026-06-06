@@ -1,5 +1,5 @@
 import { HttpEvent, HttpInterceptorFn, HttpParams } from '@angular/common/http';
-import { inject } from '@angular/core/primitives/di';
+import { inject } from '@angular/core';
 import { BusyService } from '../services/busy-service';
 import { delay, finalize, of, tap } from 'rxjs';
 
@@ -16,11 +16,11 @@ export const loadingInterceptor: HttpInterceptorFn = (req, next) => {
     return paramString ? `${url}?${paramString}` : url;
   }
 
-  const invalidCache = (urlPattern: string) => {
+  const invalidateCache = (urlPattern: string) => {
     for (const key of cache.keys()) {
       if (key.includes(urlPattern)) {
         cache.delete(key);
-        console.log(`Cache invalidated for ${key}`);
+        console.log(`Cache invalidated for: ${key}`);
       }
     }
   }
@@ -28,7 +28,11 @@ export const loadingInterceptor: HttpInterceptorFn = (req, next) => {
   const cacheKey = generateCacheKey(req.url, req.params);
 
   if (req.method.includes('POST') && req.url.includes('/likes')) {
-    invalidCache('/likes');
+    invalidateCache('/likes');
+  }
+
+  if (req.method.includes('POST') && req.url.includes('/messages')) {
+    invalidateCache('/messages');
   }
 
   if (req.method === 'GET') {
@@ -39,7 +43,7 @@ export const loadingInterceptor: HttpInterceptorFn = (req, next) => {
   }
 
   busyService.busy();
-  
+
   return next(req).pipe(
     delay(2000),
     tap(response => {
