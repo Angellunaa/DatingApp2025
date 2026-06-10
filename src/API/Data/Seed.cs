@@ -1,6 +1,7 @@
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
+using API.DTOs;
 using API.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,12 +12,13 @@ public class Seed
     public static async Task SeedUsers(AppDbContext context)
     {
         if (await context.Users.AnyAsync()) return;
+
         var seedUsersData = await File.ReadAllTextAsync("Data/UserSeedData.json");
-        var seedUsers = JsonSerializer.Deserialize<List<SeedUserDTO>>(seedUsersData);
+        var seedUsers = JsonSerializer.Deserialize<List<SeedUserDto>>(seedUsersData);
 
         if (seedUsers == null)
         {
-            Console.WriteLine("No seed data available.");
+            Console.WriteLine("No seed data available");
             return;
         }
 
@@ -27,10 +29,9 @@ public class Seed
             {
                 Id = seedUser.Id,
                 Email = seedUser.Email,
+                UserName = seedUser.Email,
                 DisplayName = seedUser.DisplayName,
                 ImageUrl = seedUser.ImageUrl,
-                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("Pa$$w0rd")),
-                PasswordSalt = hmac.Key,
                 Member = new Member
                 {
                     Id = seedUser.Id,
@@ -45,10 +46,11 @@ public class Seed
                     Created = seedUser.Created
                 }
             };
+
             user.Member.Photos.Add(new Photo
             {
                 Url = seedUser.ImageUrl!,
-                MemberId = seedUser.Id,
+                MemberId = seedUser.Id
             });
 
             context.Users.Add(user);

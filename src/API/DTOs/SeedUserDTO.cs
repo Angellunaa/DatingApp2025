@@ -1,8 +1,6 @@
-using System;
+namespace API.DTOs;
 
-namespace API.Data;
-
-public class SeedUserDTO
+public class SeedUserDto
 {
     public required string Id { get; set; }
     public required string Email { get; set; }
