@@ -5,11 +5,11 @@ using API.Interfaces;
 
 namespace API.UnitTests.Data;
 
-public class MemberRepositoryTests
+public class MembersRepositoryTests
 {
     private AppDbContext _context;
-    private MembersRepository _membersRepository;
-
+    private IMembersRepository _membersRepository;
+    
     [SetUp]
     public void Setup()
     {
@@ -18,13 +18,13 @@ public class MemberRepositoryTests
     }
 
     [Test]
-    public async Task Test1()
+    public async Task GetMembersAsync_Valid_ShouldReturnEntities()
     {
-        //Arrange & Act
+        // Arrange & Act
         var memberRequest = new MemberRequest {};
         var members = await _membersRepository.GetMembersAsync(memberRequest);
 
-        //Assert
+        // Assert
         Assert.That(members, Is.Not.Null);
         Assert.That(members.Items, Has.Count.EqualTo(10));
     }

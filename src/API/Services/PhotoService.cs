@@ -5,6 +5,7 @@ using CloudinaryDotNet.Actions;
 using Microsoft.Extensions.Options;
 
 namespace API.Services;
+
 public class PhotoService : IPhotoService
 {
     private readonly Cloudinary _cloudinary;
@@ -17,9 +18,9 @@ public class PhotoService : IPhotoService
 
     public async Task<DeletionResult> DeletePhotoAsync(string publicId)
     {
-        var deletionParams = new DeletionParams(publicId);
+        var deleteParams = new DeletionParams(publicId);
         
-        return await _cloudinary.DestroyAsync(deletionParams);
+        return await _cloudinary.DestroyAsync(deleteParams);
     }
 
     public async Task<ImageUploadResult> UploadPhotoAsync(IFormFile file)

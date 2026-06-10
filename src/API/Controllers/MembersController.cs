@@ -26,10 +26,7 @@ public class MembersController(IMembersRepository membersRepository,
     {
         var member = await membersRepository.GetMemberAsync(id);
 
-        if (member == null) 
-        {
-            return NotFound();
-        }
+        if (member == null) return NotFound();
 
         return member.ToResponse();
     }
@@ -44,7 +41,6 @@ public class MembersController(IMembersRepository membersRepository,
     public async Task<ActionResult> UpdateMember(MemberUpdateRequest request)
     {
         var memberId = User.GetMemberId();
-
         var member = await membersRepository.GetMemberForUpdateAsync(memberId);
 
         if (member == null)
@@ -61,15 +57,16 @@ public class MembersController(IMembersRepository membersRepository,
 
         membersRepository.Update(member);
 
-        if(await membersRepository.SaveAllAsync()) {
+        if (await membersRepository.SaveAllAsync())
+        {
             return NoContent();
         }
 
-        return BadRequest("Failed to update member");
+        return BadRequest("Failed to update profile");
     }
 
     [HttpPost("photo")]
-    public async Task<ActionResult<Photo>> AddPhoto(IFormFile file)
+    public async Task<ActionResult<Photo>> AddPhoto([FromForm] IFormFile file)
     {
         var member = await membersRepository.GetMemberForUpdateAsync(User.GetMemberId());
 
@@ -97,15 +94,15 @@ public class MembersController(IMembersRepository membersRepository,
             member.ImageUrl = photo.Url;
             member.User.ImageUrl = photo.Url;
         }
-        
+
         member.Photos.Add(photo);
 
         if (await membersRepository.SaveAllAsync())
         {
-            return CreatedAtAction(nameof(GetMember), new { id = member.Id }, photo);
+            return photo;
         }
 
-        return BadRequest("Something went wrong!");
+        return BadRequest("Somehting went wrong!");
     }
 
     [HttpPut("photo/{photoId}")]
@@ -128,7 +125,7 @@ public class MembersController(IMembersRepository membersRepository,
         member.ImageUrl = photo.Url;
         member.User.ImageUrl = photo.Url;
 
-        if (await membersRepository.SaveAllAsync()) 
+        if (await membersRepository.SaveAllAsync())
         {
             return NoContent();
         }
@@ -156,7 +153,6 @@ public class MembersController(IMembersRepository membersRepository,
         if (photo.PublicId != null)
         {
             var result = await photoService.DeletePhotoAsync(photo.PublicId);
-
             if (result.Error != null)
             {
                 return BadRequest(result.Error.Message);

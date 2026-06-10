@@ -4,13 +4,13 @@ namespace API.Controllers;
 
 public class ErrorController : BaseApiController
 {
+
     [HttpGet("bad-request")]
     public IActionResult GetBadRequest() // 400
     {
-        //throw new Exception("Invalid request");
         // var inputParam = -1;
-        //if (inputParam <= 0) throw new ArgumentOutOfRangeException(nameof(inputParam));
-
+        // if (inputParam <= 0) throw new ArgumentOutOfRangeException(nameof(inputParam));
+        
         return BadRequest("Bad request");
     }
 
@@ -21,7 +21,7 @@ public class ErrorController : BaseApiController
     }
 
     [HttpGet("not-found")]
-    public IActionResult GetNotFound() //404
+    public IActionResult GetNotFound() // 404
     {
         return NotFound();
     }

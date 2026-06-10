@@ -2,7 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { LikesService } from '../../core/services/likes-service';
 import { Member } from '../../types/member';
 import { MemberCard } from "../members/member-card/member-card";
-import { PaginationResult } from '../../types/PaginationMetadata';
+import { PaginationResult } from '../../types/paginationMetadata';
 import { Paginator } from "../../shared/paginator/paginator";
 
 @Component({

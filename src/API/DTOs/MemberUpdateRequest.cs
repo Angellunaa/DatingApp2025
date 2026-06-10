@@ -1,4 +1,5 @@
 namespace API.DTOs;
+
 public class MemberUpdateRequest
 {
     public string? DisplayName { get; set; }

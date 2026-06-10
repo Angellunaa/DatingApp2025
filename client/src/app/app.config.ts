@@ -23,7 +23,7 @@ export const appConfig: ApplicationConfig = {
             return lastValueFrom(initService.init())
           } finally {
             const splash = document.getElementById("initial-splash");
-            
+
             if (splash) {
               splash.remove();
             }
@@ -31,7 +31,7 @@ export const appConfig: ApplicationConfig = {
             resolve();
           }
         }, 500);
-      });    
+      });
     })
   ]
 };

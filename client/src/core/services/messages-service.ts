@@ -1,11 +1,11 @@
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { PaginationResult } from '../../types/PaginationMetadata';
+import { PaginationResult } from '../../types/paginationMetadata';
 import { Message } from '../../types/message';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class MessagesService {
   private baseUrl = environment.apiUrl;

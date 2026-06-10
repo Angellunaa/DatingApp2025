@@ -1,7 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { MessagesService } from '../../core/services/messages-service';
 import { Message } from '../../types/message';
-import { PaginationResult } from '../../types/PaginationMetadata';
+import { PaginationResult } from '../../types/paginationMetadata';
 import { Paginator } from "../../shared/paginator/paginator";
 import { RouterLink } from '@angular/router';
 import { DatePipe } from '@angular/common';

@@ -1,6 +1,6 @@
 using API.DTOs;
-using API.Interfaces;
 using API.Entities;
+using API.Interfaces;
 
 namespace API.Mappers;
 

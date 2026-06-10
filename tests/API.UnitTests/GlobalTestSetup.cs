@@ -14,6 +14,7 @@ public class GlobalTestSetup
         DbContextOptions<AppDbContext> options = new DbContextOptionsBuilder<AppDbContext>()
             .UseSqlite("Data source=dating.db")
             .Options;
+
         AppDbContext = new AppDbContext(options);
         await AppDbContext.Database.MigrateAsync();
         await Seed.SeedUsers(AppDbContext);

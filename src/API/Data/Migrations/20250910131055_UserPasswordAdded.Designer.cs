@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250910131135_UserPasswordAdded")]
+    [Migration("20250910131055_UserPasswordAdded")]
     partial class UserPasswordAdded
     {
         /// <inheritdoc />
@@ -19,7 +19,7 @@ namespace API.Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.8");
 
-            modelBuilder.Entity("DatingApp2025.API.Entities.AppUser", b =>
+            modelBuilder.Entity("API.Entities.AppUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("TEXT");

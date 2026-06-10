@@ -3,28 +3,27 @@ import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { EditableMember, Member, MemberParams, Photo } from '../../types/member';
 import { Observable, tap } from 'rxjs';
-import { PaginationResult } from '../../types/PaginationMetadata';
+import { PaginationResult } from '../../types/paginationMetadata';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class MembersService {
-  private readonly http = inject(HttpClient);
-  private readonly baseUrl = environment.apiUrl;
+  private http = inject(HttpClient);
+  private baseUrl = environment.apiUrl;
   editMode = signal(false);
   member = signal<Member | null>(null);
 
   getMember(id: string): Observable<Member> {
-    return this.http.get<Member>(this.baseUrl + 'members/' + id).pipe(
-      tap((member) => {
+    return this.http.get<Member>(this.baseUrl + "members/" + id).pipe(
+      tap(member => {
         this.member.set(member);
-      }),
+      })
     );
   }
 
   getMembers(memberParams: MemberParams): Observable<PaginationResult<Member>> {
     let params = new HttpParams();
-
     params = params.append('pageNumber', memberParams.pageNumber);
     params = params.append('pageSize', memberParams.pageSize);
     params = params.append('minAge', memberParams.minAge);
@@ -44,7 +43,7 @@ export class MembersService {
   }
 
   updateMember(member: EditableMember) {
-    return this.http.put(this.baseUrl + 'members', member);
+    return this.http.put(this.baseUrl + "members", member);
   }
 
   uploadPhoto(file: File) {

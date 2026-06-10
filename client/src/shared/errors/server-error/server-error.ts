@@ -14,12 +14,12 @@ export class ServerError {
   protected showDetails = false;
 
   constructor() {
-
     const navigation = this.router.currentNavigation();
     this.error.set(navigation?.extras?.state?.["error"]);
   }
 
   detailsToggle() {
-    this.showDetails = !this.showDetails
+    this.showDetails = !this.showDetails;
   }
+
 }

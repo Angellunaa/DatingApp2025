@@ -12,7 +12,7 @@ export class InitService {
 
   init(): Observable<null> {
     const userString = localStorage.getItem("user");
-    
+
     if (userString) {
       const user = JSON.parse(userString);
       this.accountService.currentUser.set(user);
@@ -21,5 +21,4 @@ export class InitService {
 
     return of(null);
   }
-
 }

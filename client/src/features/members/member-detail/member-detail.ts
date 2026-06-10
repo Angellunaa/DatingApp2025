@@ -26,8 +26,10 @@ export class MemberDetail implements OnInit {
 
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
-    ).subscribe(() => {
-      this.title.set(this.route.firstChild?.snapshot?.title);
+    ).subscribe({
+      next: () => {
+        this.title.set(this.route.firstChild?.snapshot?.title);
+      }
     });
   }
 }

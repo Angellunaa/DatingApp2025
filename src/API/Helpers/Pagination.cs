@@ -16,7 +16,7 @@ public static class Pagination
                 CurrentPage = pageNumber,
                 TotalPages = (int)Math.Ceiling(count / (double)pageSize),
                 PageSize = pageSize,
-                TotalCount = count,
+                TotalCount = count
             },
             Items = items
         };

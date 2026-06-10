@@ -23,7 +23,6 @@ public class MembersRepository(AppDbContext context) : IMembersRepository
     public async Task<PaginationResult<Member>> GetMembersAsync(MemberRequest request)
     {
         var query = context.Members.AsQueryable();
-
         query = query.Where(x => x.Id != request.CurrentMemberId);
 
         if (!string.IsNullOrEmpty(request.Gender))

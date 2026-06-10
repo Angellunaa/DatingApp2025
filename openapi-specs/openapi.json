@@ -491,11 +491,30 @@
           "content": {
             "multipart/form-data": {
               "schema": {
-                "type": "object",
                 "properties": {
-                  "file": {
+                  "ContentType": {
                     "type": "string",
-                    "format": "binary",
+                    "nullable": true
+                  },
+                  "ContentDisposition": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "Headers": {
+                    "type": "array",
+                    "nullable": true,
+                    "items": {}
+                  },
+                  "Length": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "Name": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "FileName": {
+                    "type": "string",
                     "nullable": true
                   }
                 }

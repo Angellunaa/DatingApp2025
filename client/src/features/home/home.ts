@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, Input, signal } from '@angular/core';
 import { Register } from "../account/register/register";
 
 @Component({
@@ -8,9 +8,9 @@ import { Register } from "../account/register/register";
   styleUrl: './home.css'
 })
 export class Home {
-  protected registerMode = signal(true);
+  protected registerMode = signal(false);
 
-  showRegister(value: boolean): void{
+  showRegister(value: boolean): void {
     this.registerMode.set(value);
   }
 }

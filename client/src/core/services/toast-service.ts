@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ToastService {
+
   constructor() {
     this.createToastContainer();
   }
@@ -16,6 +17,7 @@ export class ToastService {
       document.body.appendChild(container);
     }
   }
+
   private createToastElement(message: string, alertClass: string, duration = 5000) {
     const toastContainer = document.getElementById("toast-container");
     if (!toastContainer) return;
@@ -23,7 +25,7 @@ export class ToastService {
     const toast = document.createElement("div");
     toast.classList.add("alert", alertClass, "shadow-lg");
     toast.innerHTML = `
-      <span>${message}<span>
+      <span>${message}</span>
       <button class="ml-4 btn btn-sm btn-ghost">x</button>
     `;
     toast.querySelector("button")?.addEventListener("click", () => {
@@ -32,7 +34,7 @@ export class ToastService {
     toastContainer.append(toast);
 
     setTimeout(() => {
-      if(toastContainer.contains((toast))) {
+      if (toastContainer.contains((toast))) {
         toastContainer.removeChild(toast);
       }
     }, duration);

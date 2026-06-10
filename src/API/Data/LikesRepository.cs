@@ -36,7 +36,7 @@ public class LikesRepository(AppDbContext context) : ILikesRepository
                     .Select(q => q.TargetMember);
                 break;
             case "likedby":
-                result = query
+                result =  query
                     .Where(q => q.TargetMemberId == request.MemberId)
                     .Select(q => q.SourceMember);
                 break;

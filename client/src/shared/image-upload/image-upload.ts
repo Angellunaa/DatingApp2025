@@ -6,7 +6,6 @@ import { Component, input, output, signal } from '@angular/core';
   templateUrl: './image-upload.html',
   styleUrl: './image-upload.css'
 })
-
 export class ImageUpload {
   private fileToUpload: File | null = null;
   protected imageSource = signal<string | ArrayBuffer | null | undefined>(null);
@@ -32,7 +31,7 @@ export class ImageUpload {
     event.stopPropagation();
     this.isDragging = false;
 
-    if(event.dataTransfer?.files.length) {
+    if (event.dataTransfer?.files.length) {
       const file = event.dataTransfer.files[0];
       this.previewImage(file);
       this.fileToUpload = file;
@@ -45,7 +44,7 @@ export class ImageUpload {
   }
 
   onUploadFile() {
-    if(this.fileToUpload) {
+    if (this.fileToUpload) {
       this.uploadFile.emit(this.fileToUpload);
     }
   }
